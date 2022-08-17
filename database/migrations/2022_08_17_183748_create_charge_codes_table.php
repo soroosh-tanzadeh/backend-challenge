@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('charge_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('mobile');
-            $table->rememberToken();
+            $table->string("code", 5);
+            $table->unsignedInteger("charge_amount");
+            $table->unsignedInteger("amount_left");
             $table->timestamps();
+
+            $table->index("code");
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('charge_codes');
     }
 };

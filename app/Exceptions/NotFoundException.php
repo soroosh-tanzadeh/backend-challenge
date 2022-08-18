@@ -6,8 +6,11 @@ use RuntimeException;
 
 class NotFoundException extends RuntimeException
 {
-    public function __construct(string $message)
+    public readonly string $resource;
+
+    public function __construct(string $message, $resource = null)
     {
         $this->message = $message;
+        $this->resource = $resource;
     }
 }

@@ -43,8 +43,12 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (ExpiredChargeCodeException $e, $request) {
+            return response()->json(['status' => false, "data" => null, "message" => __("messages.expired-charge-code")], 422);
+        });
+
+        $this->renderable(function (NotFoundException $e, $request) {
+            return response()->json(['status' => false, "data" => null, "message" => "Not Found"], 404);
         });
     }
 }

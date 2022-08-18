@@ -18,7 +18,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'mobile' => fake()->phoneNumber(),
+            'mobile' => fake()->e164PhoneNumber(),
         ];
     }
 }

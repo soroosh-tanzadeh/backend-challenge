@@ -16,6 +16,8 @@ class WalletFactory extends Factory
      */
     public function definition()
     {
-        return [];
+        return [
+            "balance" => 0
+        ];
     }
 }

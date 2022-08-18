@@ -32,6 +32,7 @@ class ChargeCode extends Model
 
     protected $fillable = [
         "charge_amount",
-        "code", "amount_left"
+        "code",
+        "amount_left"
     ];
 }

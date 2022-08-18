@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\WalletController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix("v1")->group(function () {
+    Route::prefix("wallet")->name("wallet.")->group(function () {
+        Route::get("balance", [WalletController::class, "balance"])->name("balance");
+        Route::get("transactions", [WalletController::class, "transactions"])->name("transactions");
+        Route::post("charge", [WalletController::class, "charge"])->name("charge");
+    });
 });

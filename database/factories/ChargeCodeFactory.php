@@ -17,9 +17,9 @@ class ChargeCodeFactory extends Factory
     public function definition()
     {
         return [
-            "code" => randome_int(10000, 99999),
-            "charge_amount" => randome_int(1000, 5000000),
-            "amount_left" => randome_int(10, 1000)
+            "code" => random_int(10000, 99999),
+            "charge_amount" => random_int(1000, 5000000),
+            "amount_left" => random_int(10, 1000)
         ];
     }
 }

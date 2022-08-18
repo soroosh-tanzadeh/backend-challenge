@@ -29,4 +29,9 @@ use Illuminate\Database\Eloquent\Model;
 class ChargeCode extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "charge_amount",
+        "code", "amount_left"
+    ];
 }

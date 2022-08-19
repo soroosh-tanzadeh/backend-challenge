@@ -82,7 +82,7 @@
 {{ BaseURL }}/api/v1/charge-codes
 ```
 
-#### Get Charge Code transactions
+### Get Charge Code transactions
 
 **Method**: GET
 

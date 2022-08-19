@@ -32,6 +32,8 @@ class User extends Authenticatable
 {
     use HasFactory;
 
+    protected $hidden = ['created_at', "updated_at", "remember_token"];
+
     protected $fillable = [
         'mobile',
     ];

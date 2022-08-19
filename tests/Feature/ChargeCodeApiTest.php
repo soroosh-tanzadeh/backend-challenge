@@ -62,7 +62,7 @@ class ChargeCodeApiTest extends TestCase
         $wallet = Wallet::factory()->for(User::factory(), "user")->createOne();
 
         $chargeCode = ChargeCode::factory()->create();
-        $this->walletService->chargeWallet($wallet->id, $chargeCode->code);
+        $transaction = $this->walletService->chargeWallet($wallet->id, $chargeCode->code);
 
         $response = $this->get(route("charge-code.show", ['charge_code' => $chargeCode->code]));
         $response->assertOk();
@@ -71,5 +71,7 @@ class ChargeCodeApiTest extends TestCase
             "data"
         ], "message"]);
         $response->assertJsonCount(1, "data.data");
+
+        $response->assertJsonPath("data.data.0.trans_id", $transaction->id);
     }
 }

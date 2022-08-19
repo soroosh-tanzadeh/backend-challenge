@@ -30,7 +30,7 @@
 {{ BaseURL }}/api/v1/wallet/balance
 ```
 
-#### parameters 
+#### URL parameters 
 
 | key | description |
 |-----|-------------|
@@ -44,7 +44,7 @@
 {{ BaseURL }}/api/v1/wallet/transactions
 ```
 
-#### parameters 
+#### URL parameters 
 
 | key | description |
 |-----|-------------|

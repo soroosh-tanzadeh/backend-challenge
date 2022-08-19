@@ -4,11 +4,14 @@ namespace App\Service;
 
 use App\Exceptions\ExpiredChargeCodeException;
 use App\Exceptions\NotFoundException;
+use App\Http\Resources\TransactionResource;
 use App\Models\ChargeCode;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Wallet;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class WalletService
 {
@@ -22,6 +25,10 @@ class WalletService
      */
     public function chargeWallet($wallet_id, $chargeCode)
     {
+        if (Transaction::query()->where("meta->charge_code", $chargeCode)->where("wallet_id", $wallet_id instanceof Wallet ? $wallet_id->id : $wallet_id)->exists()) {
+            throw new HttpResponseException(response()->json(['status' => false, "data" => null, "message" => __("messages.code_used_prev")], 422));
+        }
+
         DB::beginTransaction();
         try {
             $wallet = $wallet_id instanceof Wallet ? $wallet_id : Wallet::query()->lockForUpdate()->findOr(
@@ -56,11 +63,16 @@ class WalletService
 
     public function getTransactions($mobile)
     {
-        return Transaction::query()->whereHas("wallet", fn ($query) => $query->whereHas("user", fn ($query) => $query->where("mobile", $mobile)))->paginate();
+        return TransactionResource::collection(
+            Transaction::query()
+                ->whereHas("wallet", fn ($query) => $query->whereHas("user", fn ($query) => $query->where("mobile", $mobile)))
+                ->paginate()
+        )
+            ->response()->getData();
     }
 
     public function getWalletByUserMobile($mobile): Wallet
     {
-        return Wallet::query()->whereHas("user", fn ($query) => $query->where("mobile", $mobile))->firstOr(fn () => throw new NotFoundException("Wallet Not Found", "wallet"));
+        return Wallet::query()->whereHas("user", fn ($query) => $query->where("mobile", $mobile))->firstOr(fn () => throw new NotFoundException("Wallet Not Found", "user"));
     }
 }

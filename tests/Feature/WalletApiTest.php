@@ -35,8 +35,8 @@ class WalletApiTest extends TestCase
         $response = $this->get(route("wallet.transactions", ["mobile" => $mobile]));
         $response->assertStatus(200);
 
-        $response->assertJsonStructure(['status', "data" => ['transactions'], "message"]);
-        $response->assertJsonCount(1, "data.transactions.data");
+        $response->assertJsonStructure(['status', "data" => ['data'], "message"]);
+        $response->assertJsonCount(1, "data.data");
     }
 
     /**

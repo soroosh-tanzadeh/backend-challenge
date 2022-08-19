@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Psr\Log\LogLevel;
+use Illuminate\Support\Str;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -44,11 +46,11 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->renderable(function (ExpiredChargeCodeException $e, $request) {
-            return response()->json(['status' => false, "data" => null, "message" => __("messages.expired-charge-code")], 422);
+            return response()->json(['status' => false, "data" => null, "message" => __("messages.expired_charge_code")], 422);
         });
 
         $this->renderable(function (NotFoundException $e, $request) {
-            return response()->json(['status' => false, "data" => null, "message" => "Not Found"], 404);
+            return response()->json(['status' => false, "data" => null, "message" => Str::ucfirst($e->resource) . " not Found"], 404);
         });
     }
 }

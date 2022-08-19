@@ -30,8 +30,7 @@ class WalletController extends Controller
 
     public function transactions(RequireMobileOnlyRequest $request)
     {
-        $transactions = $this->service->getTransactions($request->mobile);
-        return $this->response(true, ['transactions' => $transactions]);
+        return $this->response(true, $this->service->getTransactions($request->mobile));
     }
 
     public function balance(RequireMobileOnlyRequest $request)

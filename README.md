@@ -1,5 +1,5 @@
 # Code Challenge
-
+[Postman Collection](https://raw.githubusercontent.com/soroosh-tanzadeh/backend-challenge/master/doc/postman_collection.json)
 ## Http Endpoints
 
 `{{ BaseURL }}` : deployment endpoint, for examle: https://code-challenge-ir.com

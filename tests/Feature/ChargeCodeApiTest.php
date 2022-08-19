@@ -31,7 +31,7 @@ class ChargeCodeApiTest extends TestCase
         // Create Charge Code using factory
         $chargeCode = ChargeCode::factory()->create();
 
-        $response = $this->get(route("charge-code.index"));
+        $response = $this->get(route("charge-codes.index"));
         $response->assertOk();
         $response->assertJsonStructure(["status", "data", "message"]);
         // $response->dump("data.meta.total");
@@ -40,7 +40,7 @@ class ChargeCodeApiTest extends TestCase
 
     public function test_create_charge_code()
     {
-        $response = $this->post(route("charge-code.store"), ['max_usage' => mt_rand(1000, 10000), "charge_amount" => mt_rand(1500, 5000000)]);
+        $response = $this->post(route("charge-codes.store"), ['max_usage' => mt_rand(1000, 10000), "charge_amount" => mt_rand(1500, 5000000)]);
         $response->assertOk();
         $response->assertJsonStructure(["status", "data" => [
             "charge_amount",
@@ -52,7 +52,7 @@ class ChargeCodeApiTest extends TestCase
         $response->assertJsonPath("data.is_usable", true);
 
         $chargeCode = ChargeCode::factory()->create();
-        $response = $this->post(route("charge-code.store"), ['max_usage' => mt_rand(1000, 10000), "charge_amount" => mt_rand(1500, 5000000), "code" => "$chargeCode->code"]);
+        $response = $this->post(route("charge-codes.store"), ['max_usage' => mt_rand(1000, 10000), "charge_amount" => mt_rand(1500, 5000000), "code" => "$chargeCode->code"]);
         $response->assertStatus(422);
         $response->assertJsonPath("message", __("validation.unique", ['attribute' => "code"]));
     }
@@ -64,7 +64,7 @@ class ChargeCodeApiTest extends TestCase
         $chargeCode = ChargeCode::factory()->create();
         $transaction = $this->walletService->chargeWallet($wallet->id, $chargeCode->code);
 
-        $response = $this->get(route("charge-code.show", ['charge_code' => $chargeCode->code]));
+        $response = $this->get(route("charge-codes.show", ['charge_code' => $chargeCode->code]));
         $response->assertOk();
 
         $response->assertJsonStructure(["status", "data" => [

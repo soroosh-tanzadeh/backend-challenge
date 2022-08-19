@@ -22,5 +22,5 @@ Route::prefix("v1")->group(function () {
         Route::get("transactions", [WalletController::class, "transactions"])->name("transactions");
         Route::post("charge", [WalletController::class, "charge"])->name("charge");
     });
-    Route::apiResource("charge-code", ChargeCodeController::class)->only(['index', "show", "store"]);
+    Route::apiResource("charge-codes", ChargeCodeController::class)->only(['index', "show", "store"]);
 });

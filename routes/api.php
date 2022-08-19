@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ChargeCodeController;
 use App\Http\Controllers\Api\V1\WalletController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,5 @@ Route::prefix("v1")->group(function () {
         Route::get("transactions", [WalletController::class, "transactions"])->name("transactions");
         Route::post("charge", [WalletController::class, "charge"])->name("charge");
     });
+    Route::apiResource("charge-code", ChargeCodeController::class)->only(['index', "show", "store"]);
 });

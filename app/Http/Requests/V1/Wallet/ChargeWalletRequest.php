@@ -3,6 +3,7 @@
 namespace App\Http\Requests\V1\Wallet;
 
 use App\Http\Requests\V1\BaseRequest;
+use App\Rules\MobileRule;
 
 class ChargeWalletRequest extends BaseRequest
 {
@@ -25,7 +26,7 @@ class ChargeWalletRequest extends BaseRequest
     {
         return [
             "code" => ['required', "exists:charge_codes"],
-            "mobile" => ['required']
+            "mobile" => ['required',  new MobileRule()]
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\V1;
 
+use App\Rules\MobileRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RequireMobileOnlyRequest extends BaseRequest
@@ -24,7 +25,7 @@ class RequireMobileOnlyRequest extends BaseRequest
     public function rules()
     {
         return [
-            "mobile" => ['required']
+            "mobile" => ['required', new MobileRule()]
         ];
     }
 }

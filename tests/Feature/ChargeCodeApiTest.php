@@ -34,7 +34,6 @@ class ChargeCodeApiTest extends TestCase
         $response = $this->get(route("charge-codes.index"));
         $response->assertOk();
         $response->assertJsonStructure(["status", "data", "message"]);
-        // $response->dump("data.meta.total");
         $response->assertJsonPath("data.meta.total", $prevCount + 1);
     }
 

@@ -33,7 +33,7 @@ class ChargeCodeService
     public function getUsageReport($code)
     {
         return ChargeCodeUsageResource::collection(
-            Transaction::query()->with(['wallet', "wallet.user"])->where("meta->charge_code", $code)->paginate()
+            Transaction::query()->with(['wallet', "wallet.user", "chargeCode"])->whereHas("chargeCode", fn ($query) => $query->whereCode($code))->paginate()
         )->response()->getData();
     }
 

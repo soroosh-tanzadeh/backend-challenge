@@ -41,6 +41,6 @@ class WalletServiceTest extends TestCase
         $this->walletService->chargeWallet($wallet->id, $chargeCode->code);
 
         $this->assertEquals($chargeCode->amount, $wallet->balance, "Wallet Charge Not Working");
-        $this->assertTrue(Transaction::query()->whereWalletId($wallet->id)->where("meta->charge_code", $chargeCode->code)->exists(), "Transaction not created");
+        $this->assertTrue(Transaction::query()->whereWalletId($wallet->id)->whereHas("chargeCode", fn ($query) => $query->whereCode($chargeCode->code))->exists(), "Transaction not created");
     }
 }

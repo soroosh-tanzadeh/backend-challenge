@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignIdFor(Wallet::class)->constrained()->restrictOnDelete()->cascadeOnUpdate();
             $table->integer("amount");
             $table->enum("action", ['buy', "transfer", "charge"]);
-            $table->json("meta")->nullable();
             $table->timestamps();
         });
     }

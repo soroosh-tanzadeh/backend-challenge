@@ -25,10 +25,6 @@ class WalletService
      */
     public function chargeWallet($wallet_id, $chargeCode)
     {
-        if (Transaction::query()->where("meta->charge_code", $chargeCode)->where("wallet_id", $wallet_id instanceof Wallet ? $wallet_id->id : $wallet_id)->exists()) {
-            throw new HttpResponseException(response()->json(['status' => false, "data" => null, "message" => __("messages.code_used_prev")], 422));
-        }
-
         DB::beginTransaction();
         try {
             $wallet = $wallet_id instanceof Wallet ? $wallet_id : Wallet::query()->lockForUpdate()->findOr(
@@ -41,12 +37,17 @@ class WalletService
                 fn () => throw new ExpiredChargeCodeException("Charge Code Not Found", "chargeCode")
             );
 
+            // Check if charge code is used for the wallet
+            if ($chargeCodeRow->transactions()->where("wallet_id", $wallet->id)->exists()) {
+                throw new HttpResponseException(response()->json(['status' => false, "data" => null, "message" => __("messages.code_used_prev")], 422));
+            }
+
+
             $transaction = $wallet->transactions()->create([
                 "amount" => $chargeCodeRow->charge_amount,
                 "action" => "charge",
-                "meta" => ['charge_code' => $chargeCode]
             ]);
-
+            $transaction->chargeCode()->attach($chargeCodeRow->id);
             $wallet->balance += $chargeCodeRow->charge_amount;
             $chargeCodeRow->amount_left -= 1;
 

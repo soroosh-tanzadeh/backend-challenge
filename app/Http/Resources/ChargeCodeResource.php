@@ -17,7 +17,7 @@ class ChargeCodeResource extends JsonResource
     {
         return [
             "code" => $this->code,
-            "max_usage" => $this->amount_left + Transaction::query()->where("meta->charge_code", $this->code)->count(),
+            "max_usage" => $this->amount_left + Transaction::query()->whereHas("chargeCode", fn ($query) => $query->whereCode($this->code))->count(),
             "amount_left" => $this->amount_left,
             "charge_amount" => $this->charge_amount,
             "is_usable" => $this->amount_left > 0

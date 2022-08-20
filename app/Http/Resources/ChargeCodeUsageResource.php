@@ -17,7 +17,7 @@ class ChargeCodeUsageResource extends JsonResource
         return [
             "trans_id" => $this->id,
             "amount" => $this->amount,
-            "code" => $this->meta->charge_code,
+            "code" => $this->chargeCode->get(0)->charge_amount,
             "user" => $this->wallet->user,
             "time" => $this->created_at
         ];

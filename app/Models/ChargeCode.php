@@ -35,4 +35,9 @@ class ChargeCode extends Model
         "code",
         "amount_left"
     ];
+
+    public function transactions()
+    {
+        return $this->belongsToMany(Transaction::class, "transaction_charge_code");
+    }
 }

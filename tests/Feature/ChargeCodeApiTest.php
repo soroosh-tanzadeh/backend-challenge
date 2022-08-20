@@ -67,10 +67,10 @@ class ChargeCodeApiTest extends TestCase
         $response->assertOk();
 
         $response->assertJsonStructure(["status", "data" => [
-            "data"
+            "charge_code", "transactions"
         ], "message"]);
-        $response->assertJsonCount(1, "data.data");
+        $response->assertJsonCount(1, "data.transactions.data");
 
-        $response->assertJsonPath("data.data.0.trans_id", $transaction->id);
+        $response->assertJsonPath("data.transactions.data.0.trans_id", $transaction->id);
     }
 }

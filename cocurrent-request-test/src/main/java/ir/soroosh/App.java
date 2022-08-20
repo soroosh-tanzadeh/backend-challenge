@@ -16,7 +16,7 @@ public class App {
             while (true) {
                 ChargeWalletService chargeWalletService = new ChargeWalletService("http://localhost:8000/api/v1");
                 try {
-                    if (!chargeWalletService.charge("+989"+faker.numerify("#########"), "73831971")) {
+                    if (!chargeWalletService.charge("+989"+faker.numerify("#########"), "44933974")) {
                         break;
                     }
                     i++;
@@ -31,7 +31,7 @@ public class App {
             while (true) {
                 ChargeWalletService chargeWalletService = new ChargeWalletService("http://localhost:8000/api/v1");
                 try {
-                    if (!chargeWalletService.charge("+989"+faker.numerify("#########"), "73831971")) {
+                    if (!chargeWalletService.charge("+989"+faker.numerify("#########"), "44933974")) {
                         break;
                     }
                     i++;

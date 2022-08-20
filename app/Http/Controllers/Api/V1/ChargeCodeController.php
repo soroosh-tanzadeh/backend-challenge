@@ -49,8 +49,8 @@ class ChargeCodeController extends Controller
      */
     public function show($code)
     {
-        ChargeCode::query()->where("code", $code)->firstOrFail();
+        $chargeCode = ChargeCode::query()->where("code", $code)->firstOrFail();
 
-        return $this->response(true, $this->service->getUsageReport($code));
+        return $this->response(true, ["charge_code" => ChargeCodeResource::make($chargeCode), "transactions" => $this->service->getUsageReport($code)]);
     }
 }

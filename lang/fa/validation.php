@@ -151,6 +151,7 @@ return [
     |
     */
     'attributes' => [
+        "code" => "کد",
         "name" => "نام",
         "username" => "نام کاربری",
         "email" => "پست الکترونیکی",

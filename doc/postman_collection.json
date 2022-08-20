@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"1111111111\",\n    \"mobile\":\"+989378936669\"\n}",
+							"raw": "{\n    \"code\":\"71742836\",\n    \"mobile\":\"+989378936666\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -731,18 +731,18 @@
 					},
 					"response": [
 						{
-							"name": "Charge code transactions",
+							"name": "Charge Code Transactions",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{BaseURL}}/charge-code/1111111111",
+									"raw": "{{BaseURL}}/charge-codes/78429025",
 									"host": [
 										"{{BaseURL}}"
 									],
 									"path": [
-										"charge-code",
-										"1111111111"
+										"charge-codes",
+										"78429025"
 									]
 								}
 							},
@@ -756,11 +756,11 @@
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 19 Aug 2022 12:15:11 GMT"
+									"value": "Sat, 20 Aug 2022 14:46:17 GMT"
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 19 Aug 2022 12:15:11 GMT"
+									"value": "Sat, 20 Aug 2022 14:46:17 GMT"
 								},
 								{
 									"key": "Connection",
@@ -784,7 +784,7 @@
 								},
 								{
 									"key": "X-RateLimit-Remaining",
-									"value": "57"
+									"value": "58"
 								},
 								{
 									"key": "Access-Control-Allow-Origin",
@@ -792,7 +792,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"data\": [\n            {\n                \"trans_id\": 7,\n                \"amount\": 5000000,\n                \"code\": \"1111111111\",\n                \"user\": {\n                    \"id\": 1,\n                    \"mobile\": \"+989378936669\"\n                },\n                \"time\": \"2022-08-19T11:14:32.000000Z\"\n            }\n        ],\n        \"links\": {\n            \"first\": \"http://localhost:8000/api/v1/charge-code/1111111111?page=1\",\n            \"last\": \"http://localhost:8000/api/v1/charge-code/1111111111?page=1\",\n            \"prev\": null,\n            \"next\": null\n        },\n        \"meta\": {\n            \"current_page\": 1,\n            \"from\": 1,\n            \"last_page\": 1,\n            \"links\": [\n                {\n                    \"url\": null,\n                    \"label\": \"قبلی\",\n                    \"active\": false\n                },\n                {\n                    \"url\": \"http://localhost:8000/api/v1/charge-code/1111111111?page=1\",\n                    \"label\": \"1\",\n                    \"active\": true\n                },\n                {\n                    \"url\": null,\n                    \"label\": \"بعدی\",\n                    \"active\": false\n                }\n            ],\n            \"path\": \"http://localhost:8000/api/v1/charge-code/1111111111\",\n            \"per_page\": 15,\n            \"to\": 1,\n            \"total\": 1\n        }\n    },\n    \"message\": null\n}"
+							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"charge_code\": {\n            \"code\": \"78429025\",\n            \"max_usage\": 1000,\n            \"amount_left\": 998,\n            \"charge_amount\": 5000000,\n            \"is_usable\": true\n        },\n        \"transactions\": {\n            \"data\": [\n                {\n                    \"trans_id\": 1,\n                    \"amount\": 5000000,\n                    \"code\": 5000000,\n                    \"user\": {\n                        \"id\": 1,\n                        \"mobile\": \"+989378936669\"\n                    },\n                    \"time\": \"2022-08-20T14:43:50.000000Z\"\n                },\n                {\n                    \"trans_id\": 2,\n                    \"amount\": 5000000,\n                    \"code\": 5000000,\n                    \"user\": {\n                        \"id\": 2,\n                        \"mobile\": \"+989378936666\"\n                    },\n                    \"time\": \"2022-08-20T14:44:08.000000Z\"\n                }\n            ],\n            \"links\": {\n                \"first\": \"http://localhost:8000/api/v1/charge-codes/78429025?page=1\",\n                \"last\": \"http://localhost:8000/api/v1/charge-codes/78429025?page=1\",\n                \"prev\": null,\n                \"next\": null\n            },\n            \"meta\": {\n                \"current_page\": 1,\n                \"from\": 1,\n                \"last_page\": 1,\n                \"links\": [\n                    {\n                        \"url\": null,\n                        \"label\": \"قبلی\",\n                        \"active\": false\n                    },\n                    {\n                        \"url\": \"http://localhost:8000/api/v1/charge-codes/78429025?page=1\",\n                        \"label\": \"1\",\n                        \"active\": true\n                    },\n                    {\n                        \"url\": null,\n                        \"label\": \"بعدی\",\n                        \"active\": false\n                    }\n                ],\n                \"path\": \"http://localhost:8000/api/v1/charge-codes/78429025\",\n                \"per_page\": 15,\n                \"to\": 2,\n                \"total\": 2\n            }\n        }\n    },\n    \"message\": null\n}"
 						}
 					]
 				}

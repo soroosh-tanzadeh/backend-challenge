@@ -29,6 +29,8 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['updated_at'];
+
     protected $fillable = [
         "wallet_id",
         "amount",
